@@ -1,7 +1,8 @@
 # nf-assemflow: Genome & Metagenome Assembly Pipeline (Nextflow)
 
-**nf-assemflow** is a modular and reproducible **Nextflow pipeline** for assembling **genome** or **metagenome** data from Illumina and/or long-read sequencing technologies.  
-It integrates multiple assemblers — **SPAdes**, **SKESA**, **Unicycler**, **Shovill**, and **Flye** — with optional **reorientation** and **polishing** using **DNAapler**, **Medaka**, **Polypolish**, and **PyPolca**.
+**nf-assemflow** is a modular and reproducible **Nextflow pipeline** for assembling **genomes** or **metagenomes** from Illumina and/or long-read sequencing data.
+
+It processes quality-controlled, host-removed paired-end or single-end reads (short and/or long) and integrates multiple assemblers — **SPAdes**, **SKESA**, **Unicycler**, **Shovill**, and **Flye** — with optional **reorientation** and **polishing** using **DNAapler**, **Medaka**, **Polypolish**, and **PyPolca**.
 
 ---
 
