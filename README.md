@@ -1,16 +1,53 @@
-# ABPROVLAB/assemflow
+# 🧬 nf-assemflow: Genome & Metagenome Assembly Pipeline (Nextflow)
 
-[![GitHub Actions CI Status](https://github.com/ABPROVLAB/assemflow/actions/workflows/nf-test.yml/badge.svg)](https://github.com/ABPROVLAB/assemflow/actions/workflows/nf-test.yml)
-[![GitHub Actions Linting Status](https://github.com/ABPROVLAB/assemflow/actions/workflows/linting.yml/badge.svg)](https://github.com/ABPROVLAB/assemflow/actions/workflows/linting.yml)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX)
-[![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
+**nf-assemflow** is a modular and reproducible **Nextflow pipeline** for assembling **genome** or **metagenome** data from Illumina and/or long-read sequencing technologies.  
+It integrates multiple assemblers — **SPAdes**, **SKESA**, **Unicycler**, **Shovill**, and **Flye** — with optional **reorientation** and **polishing** using **DNAapler**, **Medaka**, **Polypolish**, and **PyPolca**.
 
-[![Nextflow](https://img.shields.io/badge/version-%E2%89%A524.10.5-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
-[![nf-core template version](https://img.shields.io/badge/nf--core_template-3.3.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/3.3.2)
-[![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
-[![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
-[![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
-[![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://cloud.seqera.io/launch?pipeline=https://github.com/ABPROVLAB/assemflow)
+---
 
+## 🚀 Features
+
+- Supports **genome** and **metagenome** assembly workflows  
+- Handles **Illumina-only**, **long-read-only**, or **hybrid (Illumina + long-read)** data  
+- Assemblers:
+  - [SPAdes](https://github.com/ablab/spades)
+  - [SKESA](https://github.com/ncbi/SKESA)
+  - [Unicycler](https://github.com/rrwick/Unicycler)
+  - [Shovill](https://github.com/tseemann/shovill)
+  - [Flye](https://github.com/fenderglass/Flye)
+- **Post-assembly refinement:**
+  - [DNAapler](https://github.com/widdowquinn/DNAAppler) — reorient circular genomes  
+  - [Medaka](https://github.com/nanoporetech/medaka) — long-read polishing  
+  - [Polypolish](https://github.com/rrwick/Polypolish) — short-read polishing  
+  - [PyPolca](https://github.com/alekseyzimin/py-polca) — Illumina correction  
+- Containerized (Docker / Singularity)
+- Scalable for local, HPC, or cloud environments  
+- Integrated **MultiQC** and **QUAST** reporting  
+
+---
+
+## 🧩 Pipeline Overview
+
+```mermaid
+flowchart TD
+    A[Input Reads (FASTQ)] --> B[QC & Trimming]
+    B --> C{Assembly Mode}
+    C -->|Illumina| D[SPAdes / SKESA / Shovill]
+    C -->|Hybrid| E[Unicycler]
+    C -->|Long-read| F[Flye]
+    E --> G[DNAapler: Reorient Circular Genomes]
+    F --> G
+    G --> H{Polishing}
+    H -->|Long-read| I[Medaka]
+    H -->|Short-read| J[Polypolish + PyPolca]
+    D --> K[Assembly QC & Stats]
+    I --> K
+    J --> K
+    K --> L[Reports: MultiQC / QUAST]
+
+
+# nf-assemflow
+nf-assemflow is a bioinformatics nextflow pipeline that can be used to annotate the assemblied genome
 ## Introduction
 
 **ABPROVLAB/assemflow** is a bioinformatics pipeline that ...
