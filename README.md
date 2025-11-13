@@ -27,6 +27,13 @@ It processes quality-controlled, host-removed paired-end or single-end reads (sh
 
 ## Quick start
 
+### Check workflow options
+You can clone or download the nf-qcflow from github to local computer or you can directly run the pipeline from github. To check the pipeline command line options:
+
+```{r df-drop-ok, class.source="bg-success"}
+# running directly from github without downloading or cloning
+nextflow run xiaoli-dong/nf-assemflow -r revision_number(e.g:04b8745) --help
+
 ### Prepare required samplesheet input
 The nf-assemflow pipeline requires user to provide a csv format samplesheet, which contains the sequenence information for each sample, as input. See below for what the samplesheet looks like:
 
@@ -49,6 +56,7 @@ The csv format samplesheet has five required columns:
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
+
 ### Run the pipeline:
 
 <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
@@ -62,6 +70,39 @@ nextflow run xiaoli-dong/nf-assemflow \
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_; see [docs](https://nf-co.re/docs/usage/getting_started/configuration#custom-configuration-files).
+## nf-qcflow command-line options
+
+### Input / output options:
+
+```
+--input <string>    # Path to a CSV file containing sample information
+--outdir <string>   # Output directory for results. Must be an absolute path on cloud storage
+```
+### general parameters
+```
+--platform                           [string]          [default: illumina] 
+--skip_short_reads_assembly          [boolean]         
+--short_read_assembly                [string]          [default: shovill] 
+--skip_nanopore_reads_assembly       [boolean]         
+--long_read_assembly                 [string]          [default: flye] 
+--rasusa_coverage                    [integer]         [default: 100] 
+--skip_recenter_genome               [boolean]         
+--recenter_method                    [string]          [default: dnaapler] 
+--skip_nanopore_reads_polish         [boolean]         
+--nanopore_reads_polisher            [string]          [default: medaka] 
+--medaka_models                      [string]          [default: /your_path_to/singularity_home/.medaka/data] 
+--skip_illumina_reads_polish         [boolean]         
+--skip_polypolish                    [boolean]         
+--skip_polca                         [boolean]         
+--skip_pypolca                       [boolean]         
+--skip_checkm2                       [boolean]         
+--checkm2_db                         [string]          [default: /your_path_to/CheckM2_database/uniref100.KO.1.dmnd] 
+--skip_depth_and_coverage_illumina   [boolean]         
+--skip_depth_and_coverage_nanopore   [boolean]         
+--help                               [boolean, string] Show the help message for all top level parameters. When a parameter is given to `--help`, the full help message of that parameter will be printed. 
+--help_full                          [boolean]         Show the help message for all non-hidden parameters. 
+--show_hidden                        [boolean]         Show all hidden parameters in the help message. This needs to be used in combination with `--help` or `--help_full`. 
+```
 
 ## Credits
 
