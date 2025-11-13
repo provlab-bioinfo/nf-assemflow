@@ -23,8 +23,6 @@ It processes quality-controlled, host-removed paired-end or single-end reads (sh
   - [PyPolca](https://github.com/alekseyzimin/py-polca) — Illumina correction  
 - Containerized (Docker / Singularity)
 - Scalable for local, HPC, or cloud environments  
-- Integrated **MultiQC** and **QUAST** reporting  
-
 ---
 
 ## Usage
