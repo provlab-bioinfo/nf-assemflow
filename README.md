@@ -106,4 +106,4 @@ nextflow run xiaoli-dong/nf-assemflow \
 
 ## Credits
 
-xiaolid-ong/assemflow was originally written by Xiaoli Dong.
+xiaolid-ong/nf-assemflow was originally written by Xiaoli Dong.
